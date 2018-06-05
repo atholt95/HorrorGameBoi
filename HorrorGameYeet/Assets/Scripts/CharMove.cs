@@ -15,7 +15,7 @@ public class CharMove : MonoBehaviour {
 
         if (cam == null)
         {
-            cam = Camera.main;
+            cam = Camera.main; // See it's right here bitchtits
         }
 	}
 	
