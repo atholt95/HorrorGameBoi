@@ -9,6 +9,7 @@ public class PlayerMove : MonoBehaviour {
     public float moveSpeed;
 
     private Vector3 moveDirection;
+    public float gravityScale;
 
     public Transform pivot;
 
@@ -23,10 +24,13 @@ public class PlayerMove : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+        float yStore = moveDirection.y;
+
         moveDirection = (transform.forward * Input.GetAxisRaw("Vertical")) + (transform.right * Input.GetAxisRaw("Horizontal"));
         moveDirection = moveDirection.normalized * moveSpeed;
-        // moveDirection.y = yStore;
+        moveDirection.y = yStore;
 
+        moveDirection.y = moveDirection.y + (Physics.gravity.y * gravityScale * Time.deltaTime);
         controller.Move(moveDirection * Time.deltaTime);
 
         if (Input.GetAxisRaw("Horizontal") != 0 || Input.GetAxisRaw("Vertical") != 0)
