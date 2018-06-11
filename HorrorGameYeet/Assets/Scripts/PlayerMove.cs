@@ -12,6 +12,7 @@ public class PlayerMove : MonoBehaviour {
     public float gravityScale;
 
     public Transform pivot;
+    private GameObject _currentCam;
 
     public float rotateSpeed;
 
@@ -20,6 +21,8 @@ public class PlayerMove : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         controller = GetComponent<CharacterController>();
+
+        _currentCam = pivot.gameObject;
 	}
 	
 	// Update is called once per frame
@@ -40,4 +43,14 @@ public class PlayerMove : MonoBehaviour {
             playerModel.transform.rotation = Quaternion.Slerp(playerModel.transform.rotation, newRotation, rotateSpeed * Time.deltaTime);
         }
 	}
+
+    public GameObject CurrentCamera
+    {
+        get { return _currentCam; }
+        set
+        {
+            pivot = value.transform;
+            _currentCam = pivot.gameObject;
+        }
+    }
 }
