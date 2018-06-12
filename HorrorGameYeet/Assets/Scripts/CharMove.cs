@@ -5,7 +5,7 @@ using UnityEngine;
 public class CharMove : MonoBehaviour {
 
     Rigidbody _rigidBody;
-
+    
     public float speed = 20f;
 
     public Camera cam;
