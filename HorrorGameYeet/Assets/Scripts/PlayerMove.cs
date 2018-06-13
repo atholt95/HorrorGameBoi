@@ -17,6 +17,7 @@ public class PlayerMove : MonoBehaviour {
     public float rotateSpeed;
 
     public GameObject playerModel;
+    public Animator anim;
 
 	// Use this for initialization
 	void Start () {
@@ -27,6 +28,7 @@ public class PlayerMove : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+
         float yStore = moveDirection.y;
 
         moveDirection = (transform.forward * Input.GetAxisRaw("Vertical")) + (transform.right * Input.GetAxisRaw("Horizontal"));
@@ -41,7 +43,15 @@ public class PlayerMove : MonoBehaviour {
             transform.rotation = Quaternion.Euler(0f, pivot.rotation.eulerAngles.y, 0f);
             Quaternion newRotation = Quaternion.LookRotation(new Vector3(moveDirection.x, 0f, moveDirection.z));
             playerModel.transform.rotation = Quaternion.Slerp(playerModel.transform.rotation, newRotation, rotateSpeed * Time.deltaTime);
+            anim.Play("walking");
+
         }
+        else
+        {
+            anim.Play("Idle");
+            
+        }
+        
 	}
 
     public GameObject CurrentCamera
